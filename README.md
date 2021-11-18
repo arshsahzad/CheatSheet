@@ -1,1 +1,1 @@
-# ReposServer
+# GitConfig

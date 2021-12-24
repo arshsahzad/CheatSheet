@@ -7,7 +7,7 @@
 production: &base ## GitLab settings
   gitlab:
     ## Web server settings (note: host is the FQDN, do not include http://)
-    host: git.softretic.com ##APP_DOMAIN
+    host: git.webnizo.com ##APP_DOMAIN
     port: 443 # Set to 443 if using HTTPS, see installation.md#using-https for additional HTTPS configuration details
     https: true # Set to true if using HTTPS, see installation.md#using-https for additional HTTPS configuration details
     # The maximum time unicorn/puma can spend on the request. This needs to be smaller than the worker timeout.
@@ -66,9 +66,9 @@ production: &base ## GitLab settings
     # Uncomment and set to false if you need to disable email sending from GitLab (default: true)
     # email_enabled: true
     # Email address used in the "From" field in mails sent by GitLab
-    email_from: noreply@softretic.com ##MAIL_FROM
-    email_display_name: SoftRetic - GitRepo
-    email_reply_to: noreply@softretic.com ##REPLY_TO
+    email_from: noreply@webnizo.com ##MAIL_FROM
+    email_display_name: WebNizo - GitRepo
+    email_reply_to: noreply@webnizo.com ##REPLY_TO
     email_subject_suffix: ""
     email_smime:
     # Uncomment and set to true if you need to enable email S/MIME signing (default: false)
@@ -502,7 +502,7 @@ production: &base ## GitLab settings
         uid: "username"
         # Examples: 'america\\momo' or 'CN=Gitlab Git,CN=Users,DC=mydomain,DC=com'
         bind_dn: "cn=2336b924-814e-408c-a978-4140af5d0cc9,ou=apps,dc=cloudron"
-        password: "1bf6fb85c0124ff30c6c7d7e235eb09685eab0d7082735430aad16a0a15f1bdeb259b0a18e784bd27b0ab1d8eb90d6d5b07ed207e1354e419700e669b76f05e4"
+        password: "27e0da74429eb3fff91a784f50304368703b2d014c1da09d05d62e8c3b906095470de2e979445671889cb7319c18943848c8715dc70759d495ce91a8ffa62588"
         # Encryption method. The "method" key is deprecated in favor of
         # "encryption".
         #

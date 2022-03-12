@@ -1,1 +1,1 @@
-# GitConfig
+# DataConfig

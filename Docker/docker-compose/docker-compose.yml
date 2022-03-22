@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+  # Nginx Proxy Manager #
+  nginxproxymanager:
+    image: 'jc21/nginx-proxy-manager:latest'
+    container_name: npm-app
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '8000:81'
+      - '443:443'
+    volumes:
+      - /home/ubuntu/docker/npm-data/data:/data
+      - /home/ubuntu/docker/npm-data/letsencrypt:/etc/letsencrypt
+  # Portainer #
+  portainer:
+    image: 'portainer/portainer-ce:latest'
+    container_name: portainer
+    restart: always
+    ports:
+      - '8002:8000'
+      - '8004:9000'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /home/ubuntu/docker/portainer:/data
+  # Jenkins Application
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    privileged: true
+    user: root
+    ports:
+      - 8006:8080
+      - 8008:50000
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/local/bin/docker
+      - /home/ubuntu/docker/jenkins:/var/jenkins_home

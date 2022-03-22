@@ -1,0 +1,13 @@
+version: '3.7'
+volumes:
+  grafana-data:
+    driver: local
+services:
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - /home/ubuntu/docker/grafana:/var/lib/grafana

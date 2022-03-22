@@ -1,0 +1,12 @@
+version: '3.7'
+services: 
+    nginx:
+      image: "nginx:latest"
+      container_name: nginx
+      restart: unless-stopped
+      hostname: nginx
+      volumes:
+        - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      ports:
+        - "80:80"
+        - "443:443"

@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    privileged: true
+    user: root
+    ports:
+      - 8006:8080
+      - 8008:50000
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/local/bin/docker:/usr/local/bin/docker
+      - /home/ubuntu/docker/jenkins:/var/jenkins_home

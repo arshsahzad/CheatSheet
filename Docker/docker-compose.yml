@@ -1,0 +1,21 @@
+version: "3.7"
+networks:
+    nginx: 
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio-demo
+    restart: unless-stopped
+    ports:
+      - 9000:9000
+      - 9001:9001
+    networks:
+      - nginx
+    volumes:
+      - ./Docker/minio:/data
+    env_file:
+      - ./.env
+    command: server --console-address :9001 /data
+    #command: server --address 0.0.0.0:9001 /data
+  
+

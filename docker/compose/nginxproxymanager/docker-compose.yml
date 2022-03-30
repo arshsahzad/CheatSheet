@@ -6,8 +6,8 @@ services:
     restart: unless-stopped
     ports:
       - '80:80'
-      - '8000:81'
+      - '81:81'
       - '443:443'
     volumes:
-      - /home/ubuntu/docker/npm-data/data:/data
-      - /home/ubuntu/docker/npm-data/letsencrypt:/etc/letsencrypt
+      - /npm-app/data:/data
+      - /npm-app/letsencrypt:/etc/letsencrypt

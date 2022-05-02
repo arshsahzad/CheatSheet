@@ -4,11 +4,17 @@ services:
     image: 'prom/prometheus:latest'
     container_name: prometheus
     restart: unless-stopped
-    user: root    
+    user: root   
+    networks:
+      - mainframe 
     ports:
       - '9090:9090'
     volumes:
       - /opt/volume/prometheus:/etc/prometheus
       - /opt/volume/prometheus/data:/prometheus
     command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--config.file=/opt/volume/prometheus/prometheus.yml'
+
+networks:
+  mainframe:
+    driver: bridge

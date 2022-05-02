@@ -1,12 +1,12 @@
 version: "3.7"
 services:
-  # Nginx Proxy Manager #
+  # NginxProxyManager #
   nginxproxymanager:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: npm-app
     restart: unless-stopped
     networks:
-      - mainpanel
+      - mainframe
     ports:
       - '80:80'
       - '1024:81'
@@ -15,13 +15,13 @@ services:
       - /opt/volume/npm-app/data:/data
       - /opt/volume/npm-app/letsencrypt:/etc/letsencrypt
 
-  # Portainer Application #
+  # Portainer #
   portainer:
     image: 'portainer/portainer-ce:latest'
     container_name: portainer
     restart: always
     networks:
-      - mainpanel
+      - mainframe
     ports:
       - '1025:8000'
       - '1026:9000'
@@ -29,15 +29,15 @@ services:
       - /opt/volume/portainer:/data
       - /var/run/docker.sock:/var/run/docker.sock
 
-  # Jenkins Application #
+  # Jenkins #
   jenkins:
-    image: jenkins/jenkins:lts
+    image: 'jenkins/jenkins:lts'
     container_name: jenkins
-    restart: unless-stopped
+    restart: unless-stopped   
     privileged: true
     user: root
     networks:
-      - mainpanel
+      - mainframe
     ports:
       - '1028:8080'
       - '1027:50000'
@@ -47,5 +47,5 @@ services:
       - /usr/local/bin/docker:/usr/local/bin/docker
 
 networks:
-  mainpanel:
+  mainframe:
     driver: bridge

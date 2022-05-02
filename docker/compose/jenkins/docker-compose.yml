@@ -12,7 +12,7 @@ services:
       - '8080:8080'
       - '50000:50000'
     volumes:
-      - /opt/docker//jenkins:/var/jenkins_home
+      - /opt/volume/jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
 

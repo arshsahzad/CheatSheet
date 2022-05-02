@@ -1,15 +1,14 @@
-version: "3.7"
+version: '3.7'
 services:
-  # MinIO Application #
   minio:
-    image: minio/minio:latest
+    image: 'minio/minio:latest'
     container_name: minio
     restart: unless-stopped
     networks:
       - mainframe
     ports:
-      - 9000:9000
-      - 9001:9001
+      - '9000:9000'
+      - '9001:9001'
     volumes:
       - /opt/volume/minio:/data
     env_file:

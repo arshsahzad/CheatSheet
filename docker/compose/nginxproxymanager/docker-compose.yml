@@ -4,10 +4,16 @@ services:
     image: 'jc21/nginx-proxy-manager:latest'
     container_name: npm-app
     restart: unless-stopped
+    networks:
+      - mainframe
     ports:
       - '80:80'
-      - '81:81'
+      - '1024:81'
       - '443:443'
     volumes:
-      - /npm-app/data:/data
-      - /npm-app/letsencrypt:/etc/letsencrypt
+      - /opt/volume/npm-app/data:/data
+      - /opt/volume/npm-app/letsencrypt:/etc/letsencrypt
+
+networks:
+  mainframe:
+    driver: bridge      

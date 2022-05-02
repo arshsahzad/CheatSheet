@@ -1,20 +1,22 @@
 version: "3.7"
 services:
+  # MinIO Application #
   minio:
     image: minio/minio:latest
-    container_name: minio-demo
+    container_name: minio
     restart: unless-stopped
+    networks:
+      - mainframe
     ports:
       - 9000:9000
       - 9001:9001
-    networks:
-      - oodles
     volumes:
-      - ./volume/minio:/data
+      - /opt/volume/minio:/data
     env_file:
-      - ./ENV/minio.env
+      - ./minio.env
     command: server --console-address :9001 /data
     #command: server --address 0.0.0.0:9001 /data
 
 networks:
-    oodles:    
+  mainframe:
+    driver: bridge

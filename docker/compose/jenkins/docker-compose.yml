@@ -1,15 +1,21 @@
 version: '3.7'
 services:
   jenkins:
-    image: jenkins/jenkins:lts
+    image: 'jenkins/jenkins:lts'
     container_name: jenkins
+    restart: unless-stopped   
     privileged: true
     user: root
+    networks:
+      - mainframe
     ports:
-      - 8006:8080
-      - 8008:50000
-    restart: unless-stopped
+      - '8080:8080'
+      - '50000:50000'
     volumes:
+      - /opt/docker//jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
-      - /home/ubuntu/docker/jenkins:/var/jenkins_home
+
+networks:
+  mainframe:
+    driver: bridge

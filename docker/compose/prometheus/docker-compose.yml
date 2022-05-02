@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  prometheus:
+    image: 'prom/prometheus:latest'
+    container_name: prometheus
+    restart: unless-stopped
+    user: root    
+    ports:
+      - '9090:9090'
+    volumes:
+      - /opt/volume/prometheus:/etc/prometheus
+      - /opt/volume/prometheus/data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'

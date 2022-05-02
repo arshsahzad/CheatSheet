@@ -1,13 +1,18 @@
 version: '3.7'
-volumes:
-  grafana-data:
-    driver: local
 services:
-  grafana:
-    image: grafana/grafana-oss:latest
+  grafanaa:
+    image: 'grafana/grafana:latest'
     container_name: grafana
     restart: unless-stopped
+    networks:
+      - mainframe
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
-      - /home/ubuntu/docker/grafana:/var/lib/grafana
+      - /opt/volume/grafana:/var/lib/grafana
+    env_file:
+      - ./grafana.env
+
+networks:
+  mainframe:
+    driver: bridge      

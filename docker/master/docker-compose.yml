@@ -46,6 +46,22 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
 
+  minio:
+    image: 'minio/minio:latest'
+    container_name: minio
+    restart: unless-stopped
+    networks:
+      - mainframe
+    ports:
+      - '1034:9000'
+      - '1036:9001'
+    volumes:
+      - /opt/volume/minio:/data
+    env_file:
+      - ./minio.env
+    command: server --console-address :9001 /data
+    #command: server --address 0.0.0.0:9001 /data      |
+
   # Grafana #
   grafanaa:
     image: 'grafana/grafana:latest'
@@ -55,7 +71,7 @@ services:
     networks:
       - mainframe
     ports:
-      - '1034:3000'
+      - '1038:3000'
     volumes:
       - /opt/volume/grafana:/var/lib/grafana
     env_file:
@@ -70,7 +86,7 @@ services:
     networks:
       - mainframe 
     ports:
-      - '1036:9090'
+      - '1040:9090'
     volumes:
       - /opt/volume/prometheus:/prometheus
     command:
@@ -84,7 +100,7 @@ services:
     networks:
       - mainframe
     ports:
-      - '1038:9100'      
+      - '1042:9100'      
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro

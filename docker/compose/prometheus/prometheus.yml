@@ -8,10 +8,10 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets:
-          - prometheus:1036
+          - prometheus:1040
 
   - job_name: "node-exporter"
     scrape_interval: 5s
     static_configs:
       - targets:
-          - node-exporter:1038
+          - node-exporter:1042

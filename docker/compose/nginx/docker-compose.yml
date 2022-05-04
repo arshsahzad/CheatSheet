@@ -3,8 +3,8 @@ services:
     nginx:
       image: 'nginx:latest'
       container_name: nginx
-      restart: unless-stopped
       hostname: nginx
+      restart: unless-stopped
       networks:
         - mainframe
       ports:

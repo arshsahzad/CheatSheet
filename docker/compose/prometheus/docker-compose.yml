@@ -3,6 +3,7 @@ services:
   prometheus:
     image: 'prom/prometheus:latest'
     container_name: prometheus
+    hostname: prometheus
     restart: unless-stopped
     user: root   
     networks:
@@ -10,10 +11,9 @@ services:
     ports:
       - '9090:9090'
     volumes:
-      - /opt/volume/prometheus:/etc/prometheus
-      - /opt/volume/prometheus/data:/prometheus
+      - /opt/volume/prometheus:/prometheus
     command:
-      - '--config.file=/opt/volume/prometheus/prometheus.yml'
+      - '--config.file=./prometheus.yml'
 
 networks:
   mainframe:

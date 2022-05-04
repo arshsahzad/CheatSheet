@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+  node-exporter:
+    image: 'quay.io/prometheus/node-exporter:latest'
+    container_name: node-exporter
+    hostname: node-exporter
+    restart: unless-stopped
+    networks:
+      - mainframe
+    ports:
+      - '9100:9100'      
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /etc/hostname:/etc/nodename:ro
+
+networks:
+  mainframe:
+    driver: bridge      

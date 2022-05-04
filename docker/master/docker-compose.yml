@@ -1,4 +1,4 @@
-version: "3.7"
+version: '3.7'
 services:
   # NginxProxyManager #
   nginxproxymanager:
@@ -23,8 +23,8 @@ services:
     networks:
       - mainframe
     ports:
-      - '1025:8000'
-      - '1026:9000'
+      - '1026:8000'
+      - '1028:9000'
     volumes:
       - /opt/volume/portainer:/data
       - /var/run/docker.sock:/var/run/docker.sock
@@ -39,12 +39,59 @@ services:
     networks:
       - mainframe
     ports:
-      - '1028:8080'
-      - '1027:50000'
+      - '1030:8080'
+      - '1032:50000'
     volumes:
       - /opt/volume/jenkins:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
+
+  # Grafana #
+  grafanaa:
+    image: 'grafana/grafana:latest'
+    container_name: grafana
+    restart: unless-stopped   
+    user: root
+    networks:
+      - mainframe
+    ports:
+      - '1034:3000'
+    volumes:
+      - /opt/volume/grafana:/var/lib/grafana
+    env_file:
+      - ./grafana.env
+
+  # Prometheus #
+  prometheus:
+    image: 'prom/prometheus:latest'
+    container_name: prometheus
+    hostname: prometheus
+    restart: unless-stopped
+    user: root   
+    networks:
+      - mainframe 
+    ports:
+      - '1036:9090'
+    volumes:
+      - /opt/volume/prometheus:/prometheus
+    command:
+      - '--config.file=./prometheus.yml'
+
+  # Node Exporter #
+  node-exporter:
+    image: 'quay.io/prometheus/node-exporter:latest'
+    container_name: node-exporter
+    hostname: node-exporter
+    restart: unless-stopped
+    networks:
+      - mainframe
+    ports:
+      - '1038:9100'      
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+      - /etc/hostname:/etc/nodename:ro      
 
 networks:
   mainframe:

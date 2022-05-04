@@ -3,7 +3,8 @@ services:
   grafanaa:
     image: 'grafana/grafana:latest'
     container_name: grafana
-    restart: unless-stopped
+    restart: unless-stopped   
+    user: root
     networks:
       - mainframe
     ports:

@@ -1,23 +1,40 @@
 #!/bin/bash
 
-#Enter Repository Name
-read -p "Enter Repository Name: " repo_name
-mkdir -p ./$repo_name && cd ./$repo_name
-echo "Created Directory for $repo_name"
+# Settings / Change This To Your Config
+remoteHost=github.com
+remoteSSH=git@$remoteHost
+remoteUser=arshsahzad
+remoteGroup=oodlestechnologies
+localCodeDir="${HOME}/${USER}/devops/projects/BashScript/gitcloning/"
 
-#Get Repo Branch Count
-read -p "No. of Branch to Clone for $repo_name: " branch_count
-while [ $branch_count -gt 0 ]
+# Check RemoteHost Access via SSH
+ssh $remoteSSH
+echo ""
+
+# Enter Repository Name
+read -p "Enter Repository Name: " remoteRepo
+mkdir -p $localCodeDir $remoteRepo && cd ./$remoteRepo
+#echo ""
+echo "Created Directory for ($remoteRepo)"
+
+# Get Repo Branch Number
+echo ''
+read -p "No. of Branch to Clone for ($remoteRepo): " branchNum
+while [ $branchNum -gt 0 ]
 do
 
-#Enter Branch Name
-read -p "Enter Branch Name of $repo_name: " branch_name
-mkdir -p ./$branch_name && cd ./$branch_name
+# Enter Branch Name
+echo ""
+read -p "Enter Branch Name of ($remoteRepo): " remoteBranch
+mkdir -p ./$remoteBranch && cd ./$remoteBranch
 
-#Cloning Repo of Particular Branch
-git clone git@github.com:arshsahzad/$repo_name.git -b $branch_name
+# Cloning Repo of Particular Branch
+echo ""
+echo "===== Cloning Repository ($remoteRepo) of Branch ($remoteBranch) ====="
+echo ""
+git clone $remoteSSH:$remoteUser/$remoteRepo.git -b $remoteBranch
 cd ..
 
-#While Run Branch is = 0
-branch_count=$(( $branch_count - 1 ))
+# While Run Branch is = 0
+branchNum=$(( $branchNum - 1 ))
 done

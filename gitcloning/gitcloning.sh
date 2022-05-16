@@ -14,11 +14,10 @@ echo ""
 # Enter Repository Name
 read -p "Enter Repository Name: " remoteRepo
 mkdir -p $localCodeDir $remoteRepo && cd ./$remoteRepo
-#echo ""
 echo "Created Directory for ($remoteRepo)"
 
 # Get Repo Branch Number
-echo ''
+echo ""
 read -p "No. of Branch to Clone for ($remoteRepo): " branchNum
 while [ $branchNum -gt 0 ]
 do

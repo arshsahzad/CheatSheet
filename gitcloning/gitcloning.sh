@@ -34,6 +34,6 @@ echo ""
 git clone $remoteSSH:$remoteUser/$remoteRepo.git -b $remoteBranch
 cd ..
 
-# While Run Branch is = 0
+# While Run Until Branch = 0
 branchNum=$(( $branchNum - 1 ))
 done

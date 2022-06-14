@@ -5,8 +5,8 @@ remoteBucket=arshsahzad
 credProfile="--profile storj"
 credConfig="$HOME/.aws"
 remoteDir="s3://$remoteBucket/BakOps/"
-localDir="$HOME/devops/projects/LinkTree"
-remoteEndpoint=" https://gateway.ap1.storjshare.io"
+localDir="$HOME/devops/projects/ScriptBox"
+remoteEndpoint="--endpoint-url  https://gateway.ap1.storjshare.io"
 
 # Check If Credentials File Exists.
 if ! grep -q aws_access_key_id $credConfig/config; then
@@ -30,13 +30,11 @@ echo
 echo "1. Copy"
 echo "2. Sync"  
 echo "3. Exit"
-echo
 echo "Enter Your Choice:"
 read choice
 
-
 case $choice in
-    
+
     1)  # Copying Files from Local to Remote.
         echo "***********************************************"
         echo "**    Copying Files from Local to Remote     **"

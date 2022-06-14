@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
+# Enter Commitor/Author Email Address
 git filter-branch --env-filter '
-
 OLD_EMAIL="admin@arshsahzad.com"
 CORRECT_NAME="Arsh Sahzad"
 CORRECT_EMAIL="admin@arsh.dev"
@@ -18,5 +18,5 @@ export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
 fi
 ' --tag-name-filter cat -- --branches --tags
 
-# Next Commad
-# git push --force --tags origin 'refs/heads/*'
+# Command for Force Push Commit
+git push --force --tags origin 'refs/heads/*'

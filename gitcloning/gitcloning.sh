@@ -5,7 +5,7 @@ remoteHost=github.com
 remoteSSH=git@$remoteHost
 remoteUser=arshsahzad
 remoteGroup=oodlestechnologies
-localDir="~/devops/projects/ScriptBox/gitcloning/"
+localDir="$HOME/devops/projects/ScriptBox/gitcloning/"
 
 # Check RemoteHost Access via SSH
 echo

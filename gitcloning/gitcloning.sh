@@ -5,32 +5,33 @@ remoteHost=github.com
 remoteSSH=git@$remoteHost
 remoteUser=arshsahzad
 remoteGroup=oodlestechnologies
-localCodeDir="${HOME}/${USER}/devops/projects/BashScript/gitcloning/"
+localDir="$HOME/devops/projects/ScriptBox/gitcloning/"
 
 # Check RemoteHost Access via SSH
 ssh $remoteSSH
-echo ""
+echo
+
 
 # Enter Repository Name
 read -p "Enter Repository Name: " remoteRepo
 mkdir -p $localCodeDir $remoteRepo && cd ./$remoteRepo
 echo "Created Directory for ($remoteRepo)"
 
-# Get Repo Branch Number
-echo ""
+# Enter Repo Branch Number
+echo
 read -p "No. of Branch to Clone for ($remoteRepo): " branchNum
 while [ $branchNum -gt 0 ]
 do
 
 # Enter Branch Name
-echo ""
+echo
 read -p "Enter Branch Name of ($remoteRepo): " remoteBranch
 mkdir -p ./$remoteBranch && cd ./$remoteBranch
 
 # Cloning Repo of Particular Branch
-echo ""
+echo
 echo "===== Cloning Repository ($remoteRepo) of Branch ($remoteBranch) ====="
-echo ""
+echo
 git clone $remoteSSH:$remoteUser/$remoteRepo.git -b $remoteBranch
 cd ..
 

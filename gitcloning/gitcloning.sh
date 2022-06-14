@@ -5,9 +5,14 @@ remoteHost=github.com
 remoteSSH=git@$remoteHost
 remoteUser=arshsahzad
 remoteGroup=oodlestechnologies
-localDir="$HOME/devops/projects/ScriptBox/gitcloning/"
+localDir="~/devops/projects/ScriptBox/gitcloning/"
 
 # Check RemoteHost Access via SSH
+echo
+echo "*************************************"
+echo "**     SSH Access of Git Server    **"
+echo "*************************************"
+echo
 ssh $remoteSSH
 echo
 
@@ -30,7 +35,7 @@ mkdir -p ./$remoteBranch && cd ./$remoteBranch
 
 # Cloning Repo of Particular Branch
 echo
-echo "===== Cloning Repository ($remoteRepo) of Branch ($remoteBranch) ====="
+echo "**** Cloning Repository ($remoteRepo) of Branch ($remoteBranch) ****"
 echo
 git clone $remoteSSH:$remoteUser/$remoteRepo.git -b $remoteBranch
 cd ..

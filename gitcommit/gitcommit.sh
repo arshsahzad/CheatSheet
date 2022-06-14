@@ -1,3 +1,5 @@
+#!/bin/bash
+
 for Y in {2022..2022}
 do
   mkdir $Y
@@ -24,7 +26,9 @@ do
   done
   cd ../
 done
-git push -u origin main
+
+# Git Commands For Committing and Pushing
+git push -u origin master
 git rm -rf 20**
-git commit -m "init"
-git push -u origin main
+git commit -m "init commit"
+git push -u origin master

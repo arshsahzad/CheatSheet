@@ -6,7 +6,7 @@ credProfile="--profile storj"
 credConfig="$HOME/.aws"
 remoteDir="s3://$remoteBucket/BakOps/"
 localDir="$HOME/devops/projects/ScriptBox"
-remoteEndpoint="--endpoint-url  https://gateway.ap1.storjshare.io"
+remoteEndpoint="--endpoint-url https://gateway.ap1.storjshare.io"
 
 # Check If Credentials File Exists.
 if ! grep -q aws_access_key_id $credConfig/config; then

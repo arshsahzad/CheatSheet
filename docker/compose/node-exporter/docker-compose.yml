@@ -8,7 +8,7 @@ services:
     networks:
       - mainframe
     ports:
-      - '9100:9100'      
+      - '1042:9100'      
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro

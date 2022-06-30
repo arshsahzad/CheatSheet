@@ -8,7 +8,7 @@ services:
     networks:
       - mainframe
     ports:
-      - '3000:3000'
+      - '1038:3000'
     volumes:
       - /opt/volume/grafana:/var/lib/grafana
     env_file:

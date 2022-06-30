@@ -7,8 +7,8 @@ services:
     networks:
       - mainframe
     ports:
-      - '9000:9000'
-      - '9001:9001'
+      - '1034:9000'
+      - '1036:9001'
     volumes:
       - /opt/volume/minio:/data
     env_file:

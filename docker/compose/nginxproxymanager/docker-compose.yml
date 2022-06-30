@@ -8,7 +8,7 @@ services:
       - mainframe
     ports:
       - '80:80'
-      - '81:81'
+      - '1024:81'
       - '443:443'
     volumes:
       - /opt/volume/npm-app/data:/data

@@ -7,8 +7,8 @@ services:
     networks:
       - mainframe
     ports:
-      - '8000:8000'
-      - '9000:9000'
+      - '1026:8000'
+      - '1028:9000'
     volumes:
       - /opt/volume/portainer:/data
       - /var/run/docker.sock:/var/run/docker.sock

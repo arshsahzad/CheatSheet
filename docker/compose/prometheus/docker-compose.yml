@@ -9,7 +9,7 @@ services:
     networks:
       - mainframe 
     ports:
-      - '9090:9090'
+      - '1040:9090'
     volumes:
       - /opt/volume/prometheus:/prometheus
     command:

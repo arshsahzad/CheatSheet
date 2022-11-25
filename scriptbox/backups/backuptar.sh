@@ -50,7 +50,7 @@ cd ${backupDir}
 
 # Delete Backup Older Than 3 Days
 echo
-echo "Deleting Older Tar Volume Backup..."
+echo "Deleting Older Backup File..."
 echo
 find . -name "*.tar.gz" -mtime +$keepDays -exec rm -rf {} \;
 fi

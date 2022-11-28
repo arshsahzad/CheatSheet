@@ -6,7 +6,7 @@ backupDir="/opt/backup/sonarqube/"
 bucketDir="s3://oodles-infra-backups/sonarqube-backups/"
 dateFormat=$(date "+%d-%m-%Y-%H%M%S")
 fileName=$"$dateFormat-SonarQube.tar.gz"
-keepDays=3
+keepDays=1
 
 # Stop Execution If Found Any Error
 set -e
@@ -30,14 +30,13 @@ echo
 echo "Compressing $volumeDir... $(date "+%T")"
 tar -czf $backupDir$fileName -P $volumeDir
 echo
-echo "Compression Completed..."
-echo "$(du -sh $fileName) $(date "+%T")"
-echo "......................................................."
+#echo "Compression Completed... $(date "+%T")"
+echo "..................................."
 
-# Uploading Compressed Tar To Amazon S3
+# Uploading Compressed File To Amazon S3
 echo
-/usr/local/bin/aws s3 cp $backupDir$fileName $bucketDir
 echo "Uploading Compressed File To Amazon S3... $(date "+%T")"
+/usr/local/bin/aws s3 cp $backupDir$fileName $bucketDir
 echo
 /usr/local/bin/aws s3 ls $bucketDir$fileName --recursive --human-readable --summarize
 echo
@@ -50,11 +49,15 @@ cd ${backupDir}
 
 # Delete Backup Older Than 3 Days
 echo
-echo "Deleting Older Backup File..."
+echo "Deleting Older Backup File... $(date "+%T")"
 echo
-find . -name "*.tar.gz" -mtime +$keepDays -exec rm -rf {} \;
+tee | find . -name "*.tar.gz" -mtime +$keepDays -exec rm -rf {} \;
+echo
+echo "Deletion of Older Backup File Completed... $(date "+%T")"
+echo "...................................................."
 fi
 
+# Backup Process Completed
 echo
 echo "Backup Process Completed... $(date "+%T-%d/%m/%Y-%Z")"
 echo

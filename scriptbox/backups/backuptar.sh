@@ -1,12 +1,13 @@
 #!/bin/bash
 
 # Settings / Change This To Your Config
-volumeDir="/opt/sonarqube/"
-backupDir="/opt/backup/sonarqube/"
-bucketDir="s3://oodles-infra-backups/sonarqube-backups/"
+volumeDir="/opt/gitlab/"
+backupDir="/opt/backup/gitlab/"
+bucketDir="s3://oodles-infra-backups/gitlab-backups/"
 dateFormat=$(date "+%d-%m-%Y-%H%M%S")
-fileName=$"$dateFormat-SonarQube.tar.gz"
-keepDays=1
+fileName=$"$dateFormat-GitLab.tar.gz"
+sleepTime="10m"
+keepDays="+1"
 
 # Stop Execution If Found Any Error
 set -e
@@ -30,15 +31,20 @@ echo
 echo "Compressing $volumeDir... $(date "+%T")"
 tar -czf $backupDir$fileName -P $volumeDir
 echo
-#echo "Compression Completed... $(date "+%T")"
-echo "..................................."
+echo "Compression Completed... $(date "+%T")"
+echo ".................................."
+
+# Sleep for n Time
+echo
+echo "Sleep For $sleepTime"
+sleep $sleepTime
 
 # Uploading Compressed File To Amazon S3
 echo
 echo "Uploading Compressed File To Amazon S3... $(date "+%T")"
-/usr/local/bin/aws s3 cp $backupDir$fileName $bucketDir
+/usr/bin/aws s3 cp $backupDir$fileName $bucketDir
 echo
-/usr/local/bin/aws s3 ls $bucketDir$fileName --recursive --human-readable --summarize
+/usr/bin/aws s3 ls $bucketDir$fileName --recursive --human-readable --summarize
 echo
 echo "Compressed File Upload Completed... $(date "+%T")"
 echo "............................................."
@@ -51,7 +57,7 @@ cd ${backupDir}
 echo
 echo "Deleting Older Backup File... $(date "+%T")"
 echo
-tee | find . -name "*.tar.gz" -mtime +$keepDays -exec rm -rf {} \;
+find . -name "*.tar.gz" -mtime $keepDays -exec rm -rf {} \; | tee
 echo
 echo "Deletion of Older Backup File Completed... $(date "+%T")"
 echo "...................................................."

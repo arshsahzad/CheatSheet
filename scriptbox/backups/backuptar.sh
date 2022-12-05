@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Settings / Change This To Your Config
-volumeDir="/opt/gitlab/"
-backupDir="/opt/backup/gitlab/"
-bucketDir="s3://oodles-infra-backups/gitlab-backups/"
+volumeDir="/opt/sonarqube/"
+backupDir="/opt/backup/sonarqube/"
+bucketDir="s3://oodles-infra-backups/sonarqube-backups/"
 dateFormat=$(date "+%d-%m-%Y-%H%M%S")
-fileName=$"$dateFormat-GitLab.tar.gz"
-sleepTime="10m"
-keepDays="+1"
+fileName=$"$dateFormat-SonarQube.tar.gz"
+sleepTime="2m"
+keepDays="+14"
 
 # Stop Execution If Found Any Error
 set -e
@@ -42,9 +42,9 @@ sleep $sleepTime
 # Uploading Compressed File To Amazon S3
 echo
 echo "Uploading Compressed File To Amazon S3... $(date "+%T")"
-/usr/bin/aws s3 cp $backupDir$fileName $bucketDir
+/usr/local/bin/aws s3 cp $backupDir$fileName $bucketDir
 echo
-/usr/bin/aws s3 ls $bucketDir$fileName --recursive --human-readable --summarize
+/usr/local/bin/aws s3 ls $bucketDir$fileName --recursive --human-readable --summarize
 echo
 echo "Compressed File Upload Completed... $(date "+%T")"
 echo "............................................."
